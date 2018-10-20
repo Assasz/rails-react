@@ -4,10 +4,25 @@ import TodoContainer from './TodoContainer';
 class App extends React.Component {
     render () {
         return ( 
-            <div className="app">
-                <header className="app-header">
-                    <h1 className="app-title">Todos on Rails (and React)</h1>
-                </header>
+            <div className="app container">
+                <nav className="navbar navbar-expand-lg navbar-light bg-light my-3">
+                    <a className="navbar-brand" href="#">Todos on <span className="text-primary">Rails</span></a>
+                    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#app-navbar" aria-controls="app-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                        <span className="navbar-toggler-icon"></span>
+                    </button>
+                    <div className="collapse navbar-collapse" id="app-navbar">
+                        <ul className="navbar-nav mr-auto">
+                            <li className="nav-item">
+                                <a className="nav-link" href="#">
+                                    <span className="fas fa-plus mr-2" aria-hidden="true"></span>Add todo
+                                </a>
+                            </li>
+                        </ul>
+                        <form className="form-inline my-2 my-lg-0">
+                            <input className="form-control mr-sm-2" type="text" placeholder="Search"/>
+                        </form>
+                    </div>
+                </nav>
                 <TodoContainer />
             </div>
         )

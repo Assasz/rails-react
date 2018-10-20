@@ -6,5 +6,5 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-todos = ['Foo todo', 'Bar todo', 'Baz todo']
+todos = ['Lorem todo', 'Ipsum todo']
 todos.each{|todo| Todo.create(title: todo, body: "Example body of #{todo}.")}

@@ -24,9 +24,9 @@ class Api::TodosController < ApplicationController
 
   # PUT /todo/:id
   def update
-    $todo = Todo.find(params[:id])
+    @todo = Todo.find(params[:id])
 
-    if $todo.update(todo_params)
+    if @todo.update(todo_params)
       render json: @todo
     else
       render json: @todo.errors, status: :unprocessable_entity
@@ -35,9 +35,9 @@ class Api::TodosController < ApplicationController
 
   # DELETE /todo/:id
   def destroy
-    $todo = Todo.find(params[:id])
+    @todo = Todo.find(params[:id])
 
-    if @list.destroy
+    if @todo.destroy
       head :no_content, status: :ok
     else
       render json: @todo.errors, status: :unprocessable_entity

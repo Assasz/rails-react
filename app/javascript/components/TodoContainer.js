@@ -1,5 +1,5 @@
 import React from 'react'
-import axios from 'axios';
+import Moment from 'moment'
 
 class TodoContainer extends React.Component {
     constructor(props) {
@@ -18,12 +18,17 @@ class TodoContainer extends React.Component {
 
     render() {
         return (
-            <div className="todos-container">
+            <div className="todos-container card-columns">
                 {this.state.todos.map( todo => {
                     return (
-                        <div className="single-todo" key={todo.id}>
-                            <h4>{todo.title}</h4>
-                            <p>{todo.body}</p>
+                        <div className="single-todo card border-primary mb-3" key={todo.id}>
+                            <div className="card-header">
+                                <h4 className="card-title mb-0">{todo.title}</h4>
+                            </div>
+                            <div className="card-body">
+                                <p className="card-text">{todo.body}</p>
+                                <small className="mt-3">From {Moment(todo.created_at).format('d MMM')}</small>
+                            </div>
                         </div>
                     )
                 })}
