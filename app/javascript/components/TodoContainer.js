@@ -27,7 +27,7 @@ class TodoContainer extends React.Component {
                             </div>
                             <div className="card-body">
                                 <p className="card-text">{todo.body}</p>
-                                <small className="mt-3">From {Moment(todo.created_at).format('d MMM')}</small>
+                                <small className="mt-3">{Moment(todo.created_at).format('d MMM HH:mm')}</small>
                             </div>
                         </div>
                     )
