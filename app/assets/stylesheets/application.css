@@ -14,7 +14,7 @@
  *= require_self
  */
 
- div.is-invalid {
+ span.is-invalid {
     color: #FF0039;
     width: 100%;
     font-size: 80%;

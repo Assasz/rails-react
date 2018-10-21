@@ -23,30 +23,26 @@ class TodoContainer extends React.Component {
     }
 
     initValidation() {
-        let normalizer = function(value) {
-            return $.trim(value)
-        }
-
         const options = {
             rules: {
                 title: {
                     required: true,
                     maxlength: 255,
-                    normalizer: normalizer
+                    normalizer: function(value) {
+                        return $.trim(value)
+                    }
                 },
                 body: {
                     required: true,
                     maxlength: 1000,
-                    normalizer: normalizer
+                    normalizer: function(value) {
+                        return $.trim(value)
+                    }
                 },
             },
-            onkeyup: false,
             errorClass: "is-invalid",
             validClass: "is-valid",
-            errorElement: "div",
-            errorPlacement: function(error, element) {
-                error.appendTo(element.parent())
-            }
+            errorElement: "span"
         }
 
         $('#edit-form').validate(options);
