@@ -88,29 +88,29 @@ class TodoContainer extends React.Component {
                 }
             })
         })
-            .then((response) => {return response.json()})
-            .then((data) => {
-                let newTodos = this.state.todos.filter((t) => t.id !== data.id)
-                newTodos.unshift(data)
+        .then((response) => {return response.json()})
+        .then((data) => {
+            let newTodos = this.state.todos.filter((t) => t.id !== data.id)
+            newTodos.unshift(data)
 
-                this.setState({ todos: newTodos })
-            })
+            this.setState({ todos: newTodos })
+        })
         
         $('#edit-modal').modal('hide')
     }
 
     deleteTodo() {
-        fetch('/api/todos/' + this.state.currentTodo.id + '.json', {
+        fetch('/api/todoss/' + this.state.currentTodo.id + '.json', {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
             }
         })
-            .then((response) => {
-                let newTodos = this.state.todos.filter((t) => t.id !== this.state.currentTodo.id)
+        .then((response) => {
+            let newTodos = this.state.todos.filter((t) => t.id !== this.state.currentTodo.id)
 
-                this.setState({ todos: newTodos })
-            })
+            this.setState({ todos: newTodos })
+        })
 
         $('#delete-modal').modal('hide')
     }
