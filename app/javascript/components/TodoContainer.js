@@ -104,7 +104,19 @@ class TodoContainer extends React.Component {
     }
 
     deleteTodo() {
+        fetch('/api/todos/' + this.state.currentTodo.id + '.json', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then((response) => {
+                let newTodos = this.state.todos.filter((t) => t.id !== this.state.currentTodo.id)
 
+                this.setState({ todos: newTodos })
+            })
+
+        $('#delete-modal').modal('hide')
     }
 
     render() {
