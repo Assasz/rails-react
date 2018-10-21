@@ -17,11 +17,11 @@ class TodoContainer extends React.Component {
     }
 
     toggleEditModal() {
-
+        $('#edit-modal').modal();
     }
 
     toggleDeleteModal() {
-        
+        $('#delete-modal').modal();
     }
 
     render() {
