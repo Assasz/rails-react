@@ -34,14 +34,14 @@ class TodoContainer extends React.Component {
                                         id="delete-btn" 
                                         className="btn btn-link btn-sm ml-2 float-right" 
                                         title="Delete todo">
-                                        <small className="fas fa-trash-alt"></small>
+                                        <small className="fas fa-trash-alt" aria-hidden="true"></small>
                                     </button>
                                     <button 
                                         type="button" 
                                         id="edit-btn" 
                                         className="btn btn-link btn-sm ml-2 float-right" 
                                         title="Edit todo">
-                                        <small className="fas fa-pen"></small>
+                                        <small className="fas fa-pen" aria-hidden="true"></small>
                                     </button>
                                 </p>
                             </div>
