@@ -25,55 +25,6 @@ class App extends React.Component {
                 </nav>
 
                 <TodoContainer />
-
-                <div className="modal fade" id="edit-modal">
-                    <div className="modal-dialog" role="document">
-                        <div className="modal-content">
-                        <div className="modal-header">
-                            <h5 className="modal-title">Edit todo</h5>
-                            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div className="modal-body">
-                            <form id="edit-form">
-                                <div class="form-group">
-                                    <label for="title_edit">Title</label>
-                                    <input type="email" class="form-control" id="title-edit"/>
-                                </div>
-                                <div class="form-group">
-                                    <label for="body_edit">Body</label>
-                                    <textarea class="form-control" id="body-edit" rows="3"></textarea>
-                                </div>
-                            </form>
-                        </div>
-                        <div className="modal-footer">
-                            <button type="button" className="btn btn-primary">Save changes</button>
-                            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="modal fade" id="delete-modal">
-                    <div className="modal-dialog" role="document">
-                        <div className="modal-content">
-                        <div className="modal-header">
-                            <h5 className="modal-title">Delete todo</h5>
-                            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div className="modal-body">
-                            <p>Are you sure you want to delete this todo?</p>
-                        </div>
-                        <div className="modal-footer">
-                            <button type="button" className="btn btn-primary">Continue</button>
-                            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                        </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         )
     }

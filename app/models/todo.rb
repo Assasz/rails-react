@@ -1,3 +1,4 @@
 class Todo < ApplicationRecord
-    validates_presence_of :title, :body
+    validates :title, length: { maximum: 255 }, presence: true
+    validates :body, length: { maximum: 1000 }, presence: true
 end
