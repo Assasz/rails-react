@@ -1,17 +1,17 @@
 class Api::TodosController < ApplicationController
-  # GET /todo
+  # GET /todos
   def index
     @todos = Todo.all.order(:created_at)
     render json: @todos
   end
 
-  # GET /todo/:id
+  # GET /todos/:id
   def show
     @todo = Todo.find(params[:id])
     render json: @todo
   end
 
-  # POST /todo
+  # POST /todos
   def create
     @todo = Todo.new(todo_params)
 
@@ -22,7 +22,7 @@ class Api::TodosController < ApplicationController
     end
   end
 
-  # PUT /todo/:id
+  # PUT /todos/:id
   def update
     @todo = Todo.find(params[:id])
 
@@ -33,7 +33,7 @@ class Api::TodosController < ApplicationController
     end
   end
 
-  # DELETE /todo/:id
+  # DELETE /todos/:id
   def destroy
     @todo = Todo.find(params[:id])
 
