@@ -1,7 +1,7 @@
 class Api::TodosController < ApplicationController
   # GET /todos
   def index
-    @todos = Todo.all.order(:created_at)
+    @todos = Todo.all.order(updated_at: :desc)
     render json: @todos
   end
 

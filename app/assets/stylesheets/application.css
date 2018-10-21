@@ -13,3 +13,9 @@
  *= require_tree .
  *= require_self
  */
+
+ div.is-invalid {
+    color: #FF0039;
+    width: 100%;
+    font-size: 80%;
+    margin-top: 0.25rem; }

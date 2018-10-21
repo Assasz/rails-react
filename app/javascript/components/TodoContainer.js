@@ -18,14 +18,16 @@ class TodoContainer extends React.Component {
         fetch('/api/todos.json')
             .then((response) => {return response.json()})
             .then((data) => {this.setState({ todos: data }) })
+
+        this.initValidation()
     }
 
-    getValidationOptions() {
+    initValidation() {
         let normalizer = function(value) {
             return $.trim(value)
         }
 
-        return {
+        const options = {
             rules: {
                 title: {
                     required: true,
@@ -46,6 +48,8 @@ class TodoContainer extends React.Component {
                 error.appendTo(element.parent())
             }
         }
+
+        $('#edit-form').validate(options);
     }
 
     setCurrentTodo(todoId) {
@@ -72,7 +76,31 @@ class TodoContainer extends React.Component {
     }
 
     updateTodo() {
+        if (!$('#edit-form').valid()) {
+            return
+        }
+
+        fetch('/api/todos/' + this.state.currentTodo.id + '.json', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                todo: {
+                    title: $('#edit-form #title').val(),
+                    body: $('#edit-form #body').val(),
+                }
+            })
+        })
+            .then((response) => {return response.json()})
+            .then((data) => {
+                let newTodos = this.state.todos.filter((t) => t.id !== data.id)
+                newTodos.unshift(data)
+
+                this.setState({ todos: newTodos })
+            })
         
+        $('#edit-modal').modal('hide')
     }
 
     deleteTodo() {
@@ -91,7 +119,7 @@ class TodoContainer extends React.Component {
                                 </h4>
                                 <p className="card-text">{todo.body}</p>
                                 <p className="mb-0">
-                                    <small className="mt-3">{Moment(todo.created_at).format('d MMM HH:mm')}</small>
+                                    <small className="mt-3">{Moment(todo.updated_at).format('DD MMM HH:mm')}</small>
                                     <button 
                                         type="button" 
                                         id="delete-btn" 
@@ -127,11 +155,11 @@ class TodoContainer extends React.Component {
                             <form id="edit-form">
                                 <div className="form-group">
                                     <label htmlFor="title_edit">Title</label>
-                                    <input type="email" className="form-control" id="title"/>
+                                    <input type="text" className="form-control" id="title" name="title"/>
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="body_edit">Body</label>
-                                    <textarea className="form-control" id="body" rows="3"></textarea>
+                                    <textarea className="form-control" id="body" name="body" rows="3"></textarea>
                                 </div>
                             </form>
                         </div>
