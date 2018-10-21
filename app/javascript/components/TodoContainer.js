@@ -16,6 +16,14 @@ class TodoContainer extends React.Component {
             .then((data) => {this.setState({ todos: data }) });
     }
 
+    toggleEditModal() {
+
+    }
+
+    toggleDeleteModal() {
+        
+    }
+
     render() {
         return (
             <div className="todos-container card-columns">
@@ -33,14 +41,16 @@ class TodoContainer extends React.Component {
                                         type="button" 
                                         id="delete-btn" 
                                         className="btn btn-link btn-sm ml-2 float-right" 
-                                        title="Delete todo">
+                                        title="Delete todo"
+                                        onClick={this.toggleDeleteModal}>
                                         <small className="fas fa-trash-alt" aria-hidden="true"></small>
                                     </button>
                                     <button 
                                         type="button" 
                                         id="edit-btn" 
                                         className="btn btn-link btn-sm ml-2 float-right" 
-                                        title="Edit todo">
+                                        title="Edit todo"
+                                        onClick={this.toggleEditModal}>
                                         <small className="fas fa-pen" aria-hidden="true"></small>
                                     </button>
                                 </p>
