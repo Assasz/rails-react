@@ -2,6 +2,11 @@ import React from 'react'
 import TodoContainer from './TodoContainer';
 
 class App extends React.Component {
+    toggleCreateModal(e) {
+        e.preventDefault()
+        $('#create-modal').modal()
+    }
+
     render () {
         return ( 
             <div className="app container">
@@ -13,7 +18,7 @@ class App extends React.Component {
                     <div className="collapse navbar-collapse" id="app-navbar">
                         <ul className="navbar-nav mr-auto">
                             <li className="nav-item">
-                                <a className="nav-link" href="#">
+                                <a className="nav-link" href="#" onClick={(e) => {this.toggleCreateModal(e)}}>
                                     <span className="fas fa-plus mr-2" aria-hidden="true"></span>Add todo
                                 </a>
                             </li>

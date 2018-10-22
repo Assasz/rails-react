@@ -10,6 +10,7 @@ class TodoContainer extends React.Component {
             currentTodo : null
         }
 
+        this.createTodo = this.createTodo.bind(this)
         this.updateTodo = this.updateTodo.bind(this)
         this.deleteTodo = this.deleteTodo.bind(this)
     }
@@ -45,7 +46,8 @@ class TodoContainer extends React.Component {
             errorElement: "span"
         }
 
-        $('#edit-form').validate(options);
+        $('#create-form').validate(options)
+        $('#edit-form').validate(options)
     }
 
     setCurrentTodo(todoId) {
@@ -69,6 +71,34 @@ class TodoContainer extends React.Component {
         $('#delete-modal').modal()
 
         this.setCurrentTodo(todoId)
+    }
+
+    createTodo() {
+        if (!$('#create-form').valid()) {
+            return
+        }
+
+        fetch('/api/todos.json', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                todo: {
+                    title: $('#create-form #title').val(),
+                    body: $('#create-form #body').val(),
+                }
+            })
+        })
+        .then((response) => {return response.json()})
+        .then((data) => {
+            let newTodos = this.state.todos
+            newTodos.unshift(data)
+
+            this.setState({ todos: newTodos })
+        })
+        
+        $('#create-modal').modal('hide')
     }
 
     updateTodo() {
@@ -150,6 +180,35 @@ class TodoContainer extends React.Component {
                     )
                 })}
 
+                <div className="modal fade" id="create-modal">
+                    <div className="modal-dialog" role="document">
+                        <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title">Add todo</h5>
+                            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div className="modal-body">
+                            <form id="create-form">
+                                <div className="form-group">
+                                    <label htmlFor="title">Title</label>
+                                    <input type="text" className="form-control" id="title" name="title"/>
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="body">Body</label>
+                                    <textarea className="form-control" id="body" name="body" rows="3"></textarea>
+                                </div>
+                            </form>
+                        </div>
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-primary" onClick={this.createTodo}>Save changes</button>
+                            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div className="modal fade" id="edit-modal">
                     <div className="modal-dialog" role="document">
                         <div className="modal-content">
@@ -162,11 +221,11 @@ class TodoContainer extends React.Component {
                         <div className="modal-body">
                             <form id="edit-form">
                                 <div className="form-group">
-                                    <label htmlFor="title_edit">Title</label>
+                                    <label htmlFor="title">Title</label>
                                     <input type="text" className="form-control" id="title" name="title"/>
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="body_edit">Body</label>
+                                    <label htmlFor="body">Body</label>
                                     <textarea className="form-control" id="body" name="body" rows="3"></textarea>
                                 </div>
                             </form>
