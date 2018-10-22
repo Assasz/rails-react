@@ -10,9 +10,10 @@ class TodoContainer extends React.Component {
             currentTodo : null
         }
 
-        this.createTodo = this.createTodo.bind(this)
-        this.updateTodo = this.updateTodo.bind(this)
-        this.deleteTodo = this.deleteTodo.bind(this)
+        this.createTodo  = this.createTodo.bind(this)
+        this.updateTodo  = this.updateTodo.bind(this)
+        this.deleteTodo  = this.deleteTodo.bind(this)
+        this.searchTodos = this.searchTodos.bind(this)
     }
 
     componentDidMount() {
@@ -143,6 +144,33 @@ class TodoContainer extends React.Component {
         })
 
         $('#delete-modal').modal('hide')
+    }
+
+    searchTodos(container) {
+        let delay = (function(){
+            let timer = 0;
+
+            return function(callback, ms){
+                clearTimeout (timer);
+                timer = setTimeout(callback, ms);
+            };
+        })();
+
+        delay(function() {
+            fetch('/api/todos/search.json', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    search: $('#search').val()
+                })
+            })
+            .then((response) => {return response.json()})
+            .then((data) => {
+                container.setState({ todos: data })
+            })
+        }, 500)
     }
 
     render() {

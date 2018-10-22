@@ -2,9 +2,21 @@ import React from 'react'
 import TodoContainer from './TodoContainer';
 
 class App extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.container = React.createRef()
+        this.searchTodos = this.searchTodos.bind(this)
+    }
+
     toggleCreateModal(e) {
         e.preventDefault()
         $('#create-modal').modal()
+    }
+
+    searchTodos() {
+        let ref = this.container.current
+        ref.searchTodos(ref)
     }
 
     render () {
@@ -24,12 +36,12 @@ class App extends React.Component {
                             </li>
                         </ul>
                         <form className="form-inline my-2 my-lg-0">
-                            <input className="form-control mr-sm-2" type="text" placeholder="Search"/>
+                            <input className="form-control mr-sm-2" type="text" placeholder="Search" id="search" onKeyUp={this.searchTodos}/>
                         </form>
                     </div>
                 </nav>
 
-                <TodoContainer />
+                <TodoContainer ref={this.container}/>
             </div>
         )
     }

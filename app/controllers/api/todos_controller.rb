@@ -44,6 +44,18 @@ class Api::TodosController < ApplicationController
     end
   end
 
+  # POST /todos/search
+  def search
+    if !request.post?
+      head :no_content, status: :method_not_allowed
+    end
+
+    @todos = Todo.where("title LIKE :search OR body LIKE :search", search: "%#{params[:search]}%")
+      .order(updated_at: :desc)
+
+    render json: @todos
+  end
+
   private
 
   def todo_params
